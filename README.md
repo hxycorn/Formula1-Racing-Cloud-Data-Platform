@@ -27,8 +27,16 @@ Data Model (http://ergast.com/images/ergast_db.png)
 
 ![Azure Architecture](https://user-images.githubusercontent.com/44454642/201458776-a8f93591-848a-41b1-b9a0-9d1c52ad5d7b.png)
 
+<h3>Security Set Up</h3>
 
-<h3>Data Ingestion Requirement</h3>
+[set up folder](https://github.com/hxycorn/Formula1-Racing-Cloud-Data-Platform/tree/main/set_up)
+
+All the connection in configuration file are created hand handled by Azure Key Vault and created a secure connection between the datastorge and register the project
+
+<h3>Data Ingestion Requirement </h3> 
+
+[ingestion folder](https://github.com/hxycorn/Formula1-Racing-Cloud-Data-Platform/tree/main/ingestion)
+
 <ul>
   <li>Ingest All 8 Files into the data lake </li>
   <li>Ingested data must have the schema applied </li>
@@ -36,9 +44,14 @@ Data Model (http://ergast.com/images/ergast_db.png)
   <li>Ingested data must be stored in a columnar format</li>
   <li>Must be able to analyze the ingest data </li>
   <li>Ingestion logic must be able to handle incremental load</li>
-</ul> 
+  </ul>
+<b>Incremental load</b> This solution consist of incremental load to the tranformed data i.e the initial data (cutout data) is loaded fully and the new data is compared and overwritten only on MATCHING records and modify data by cerating partitioned data. In this project all the raw data from differnt file have to read and tranformed into PARQUET files and stored in DATA LAKE ADLS blob storage.
+ 
 
 <h3>Data Transformation Requirements</h3>
+
+[transformation folder](https://github.com/hxycorn/Formula1-Racing-Cloud-Data-Platform/tree/main/transformation)
+
 <ul>
   <li>Join the key information required for reporting to create a new table</li>
   <li>Join the key information required for analysis to create a new table </li>
@@ -53,6 +66,9 @@ Data Model (http://ergast.com/images/ergast_db.png)
 </ul> 
 
 <h3>Analysis Requirements</h3>
+
+[analysis folder](https://github.com/hxycorn/Formula1-Racing-Cloud-Data-Platform/tree/main/analysis)
+
 <ul>
   <li>Dominant Drivers </li>
   <li>Dominant Teams </li> 
@@ -61,6 +77,9 @@ Data Model (http://ergast.com/images/ergast_db.png)
 </ul> 
 
 <h3>Scheduling Requirements</h3>
+
+I have created a Azure datafactory service to create piplines to run this process by weekly and also added tumbling Triggers to schedules the jobs.
+
 <ul>
   <li>Scheduling to run every Sunday 10PM</li>
   <li>Ability to monitor pipelines </li> 
